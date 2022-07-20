@@ -22,11 +22,11 @@ while(True):
 
         print("Gratulacje dla gracza nr 1 !!!")
         break
-    elif isDraw(tablica)==True:
-        rysujMape(tablica)
-        print("REMIS! Spróbujcie jeszcze raz !!!")
-        break
     elif isPlayer2Win(tablica)==True:
         rysujMape(tablica)
         print("Gratulacje dla gracza nr 2 !!!")
+        break
+    elif isDraw(tablica)==True:
+        rysujMape(tablica)
+        print("REMIS! Spróbujcie jeszcze raz !!!")
         break
