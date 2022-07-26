@@ -1,61 +1,69 @@
-tablica=[[" "],[" "],[" "],[" "],[" "],[" "],[" "],[" "],[" "]]
-kolko="['0']"
-krzyzyk="['X']"
+tablica=[["[ ]" for i in range(3)] for j in range(3)]
+kolko="[0]"
+krzyzyk="[X]"
 round_nr=1
 def rysujMape(tablica):
-    print(str(tablica[0]) + str(tablica[1]) + str(tablica[2]))
-    print(str(tablica[3]) + str(tablica[4]) + str(tablica[5]))
-    print(str(tablica[6]) + str(tablica[7]) + str(tablica[8]))
+    for i in range(len(tablica)):
+        for j in range(len(tablica[i])):
+            print(str(tablica[i][j]),end=' ')
+        print()
 
-def isPlayer1Win(t):
-    if t[0]==krzyzyk and t[4]==krzyzyk and t[8]==krzyzyk:
-        return True
-    elif t[2]==krzyzyk and t[4]==krzyzyk and t[6]==krzyzyk:
-        return True
-    elif t[0] == krzyzyk and t[1] == krzyzyk and t[2] == krzyzyk:
-        return True
-    elif t[3] == krzyzyk and t[4] == krzyzyk and t[5] == krzyzyk:
-        return True
-    elif t[6] == krzyzyk and t[7] == krzyzyk and t[8] == krzyzyk:
-        return True
-    elif t[0] == krzyzyk and t[3] == krzyzyk and t[6] == krzyzyk:
-        return True
-    elif t[1] == krzyzyk and t[4] == krzyzyk and t[7] == krzyzyk:
-        return True
-    elif t[2] == krzyzyk and t[5] == krzyzyk and t[8] == krzyzyk:
-        return True
-    else:
-        return False
-def isPlayer2Win(t):
-    if t[0] == kolko and t[4] == kolko and t[8] == kolko:
-        return True
-    elif t[2] == kolko and t[4] == kolko and t[6] == kolko:
-        return True
-    elif t[0] == kolko and t[1] == kolko and t[2] == kolko:
-        return True
-    elif t[3] == kolko and t[4] == kolko and t[5] == kolko:
-        return True
-    elif t[6] == kolko and t[7] == kolko and t[8] == kolko:
-        return True
-    elif t[0] == kolko and t[3] == kolko and t[6] == kolko:
-        return True
-    elif t[1] == kolko and t[4] == kolko and t[7] == kolko:
-        return True
-    elif t[2] == kolko and t[5] == kolko and t[8] == kolko:
-        return True
-    else:
-        return False
-def isDraw(t):
+
+def isPlayer1Win(tablica):
+    xcol=0
+    xrow=0
+    for i in range(len(tablica)):
+        if i == 0:
+            if tablica[i][0] == krzyzyk and tablica[1][1] == krzyzyk and tablica[2][2] == krzyzyk:
+                return True
+            elif tablica[2][0] == krzyzyk and tablica[1][1] == krzyzyk and tablica[0][2] == krzyzyk:
+                return True
+        for j in range(len(tablica[i])):
+            if tablica[i][j]==krzyzyk:
+                xrow+=1
+            if tablica[j][i]==krzyzyk:
+                xcol+=1
+        if xrow == 3:
+            return True
+        if xcol == 3:
+            return True
+        xrow=0
+        xcol=0
+    return False
+
+def isPlayer2Win(tablica):
+    orow = 0
+    ocol = 0
+    for i in range(len(tablica)):
+        if i == 0:
+            if tablica[i][0] == kolko and tablica[1][1] == kolko and tablica[2][2] == kolko:
+                return True
+            elif tablica[2][0] == kolko and tablica[1][1] == kolko and tablica[0][2] == kolko:
+                return True
+        for j in range(len(tablica[i])):
+            if tablica[i][j] == kolko:
+                orow += 1
+            if tablica[j][i] == kolko:
+                ocol+=1
+        if orow == 3:
+            return True
+        if ocol == 3:
+            return True
+        orow = 0
+        ocol = 0
+    return False
+def isDraw(tablica):
     empty_fields=0
-    for index in t:
-        if not(index==krzyzyk) and not(index==kolko):
-            empty_fields+=1
+    for i in range(len(tablica)):
+        for j in range(len(tablica[i])):
+            if not(tablica[i][j]==krzyzyk) and not(tablica[i][j]==kolko):
+                empty_fields+=1
     if empty_fields>0:
         return False
     else:
         return True
-def isTaken(t,p):
-    if t[p]==krzyzyk or t[p]==kolko:
+def isTaken(tablica, p1, p2):
+    if tablica[int(p1)][int(p2)]==krzyzyk or tablica[int(p1)][int(p2)]==kolko:
         return True
     else:
         return False
