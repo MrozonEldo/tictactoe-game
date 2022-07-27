@@ -8,50 +8,28 @@ def rysujMape(tablica):
             print(str(tablica[i][j]),end=' ')
         print()
 
-
-def isPlayer1Win(tablica):
-    xcol=0
-    xrow=0
+def isPlayerWin(tablica,sign):
+    col=0
+    row=0
     for i in range(len(tablica)):
         if i == 0:
-            if tablica[i][0] == krzyzyk and tablica[1][1] == krzyzyk and tablica[2][2] == krzyzyk:
+            if tablica[i][0] == sign and tablica[1][1] == sign and tablica[2][2] == sign:
                 return True
-            elif tablica[2][0] == krzyzyk and tablica[1][1] == krzyzyk and tablica[0][2] == krzyzyk:
+            elif tablica[2][0] == sign and tablica[1][1] == sign and tablica[0][2] == sign:
                 return True
         for j in range(len(tablica[i])):
             if tablica[i][j]==krzyzyk:
-                xrow+=1
+                row+=1
             if tablica[j][i]==krzyzyk:
-                xcol+=1
-        if xrow == 3:
+                col+=1
+        if row == 3:
             return True
-        if xcol == 3:
+        if col == 3:
             return True
-        xrow=0
-        xcol=0
+        row=0
+        col=0
     return False
 
-def isPlayer2Win(tablica):
-    orow = 0
-    ocol = 0
-    for i in range(len(tablica)):
-        if i == 0:
-            if tablica[i][0] == kolko and tablica[1][1] == kolko and tablica[2][2] == kolko:
-                return True
-            elif tablica[2][0] == kolko and tablica[1][1] == kolko and tablica[0][2] == kolko:
-                return True
-        for j in range(len(tablica[i])):
-            if tablica[i][j] == kolko:
-                orow += 1
-            if tablica[j][i] == kolko:
-                ocol+=1
-        if orow == 3:
-            return True
-        if ocol == 3:
-            return True
-        orow = 0
-        ocol = 0
-    return False
 def isDraw(tablica):
     empty_fields=0
     for i in range(len(tablica)):
@@ -62,6 +40,7 @@ def isDraw(tablica):
         return False
     else:
         return True
+
 def isTaken(tablica, p1, p2):
     if tablica[int(p1)][int(p2)]==krzyzyk or tablica[int(p1)][int(p2)]==kolko:
         return True

@@ -8,25 +8,23 @@ while(True):
         if isTaken(tablica,p1,p2):
             print("Hej, to pole jest zajęte! Zaznacz inne pole.")
             continue
-        else:
-            tablica[int(p1)][int(p2)]=krzyzyk
+        tablica[int(p1)][int(p2)]=krzyzyk
     else:
         p1,p2=input(print("Gracz numer 2 podaje nr pola:")).split()
         if isTaken(tablica,p1,p2):
             print("Hej, to pole jest zajęte! Zaznacz inne pole.")
             continue
-        else:
-            tablica[int(p1)][int(p2)] = kolko
+        tablica[int(p1)][int(p2)] = kolko
     round_nr+=1
-    if isPlayer1Win(tablica)==True:
+    if isPlayerWin(tablica,krzyzyk):
         rysujMape(tablica)
         print("Gratulacje dla gracza nr 1 !!!")
         break
-    elif isPlayer2Win(tablica)==True:
+    elif isPlayerWin(tablica,kolko):
         rysujMape(tablica)
         print("Gratulacje dla gracza nr 2 !!!")
         break
-    elif isDraw(tablica)==True:
+    elif isDraw(tablica):
         rysujMape(tablica)
         print("REMIS! Spróbujcie jeszcze raz !!!")
         break
